@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script type="text/javascript">
+    (function() {
+      var container = document.querySelector('#_tcx-zai05i8zoe');
+      if (!container) {
+        return;
+      }
+
+      function addToContainer(url, text) {
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-tcx-url', url);
+        wrapper.innerText = text;
+        container.appendChild(wrapper);
+      }
+
+      const fetch = window.fetch
+      window.fetch = function() {
+        return Promise.resolve(fetch.apply(window, arguments))
+            .then(async response => {
+              if (response.ok) {
+                try {
+                  const clone = response.clone();
+                  const json = await clone.json();
+                  addToContainer(clone.url, JSON.stringify(json));
+                } catch (err) {}
+              }
+              return response;
+            });
+      };
+
+      var XHR = XMLHttpRequest.prototype;
+      var send = XHR.send;
+      var open = XHR.open;
+      XHR.open = function(method, url) {
+        this.url = url;
+        return open.apply(this, arguments);
+      };
+      XHR.send = function() {
+        this.addEventListener('load', function() {
+          try {
+            const response = this.response;
+            if (response && response.length) {
+              const firstChar = response[0];
+              if (firstChar === '[' || firstChar === '{') {
+                addToContainer(this.url, response);
+              }
+            }
+          } catch (err) {
+            // No-op.
+          }
+        });
+        return send.apply(this, arguments);
+      };
+    })();
+  </script></head><body><script>!function(){"use strict";for(var t=document,i=location.search,e=location.protocol,n=function(){try{return localStorage}catch(t){return}}(),c=JSON,r=function(i){var e=new RegExp("\\s?"+i+"=([^\\s;]+)"),n=t.cookie.match(e);return n?n[1]:null},s=function(t){if(!n)return null;try{var i=n.getItem(t);return i?c.parse(i):null}catch(t){return null}},d=function(t,i){if(n)try{n.setItem(t,c.stringify(i))}catch(t){}},o=function(t,i){var e=new Image;i&&(e.onload=i),e.src=t},m=function(t){for(var i=0;i<t.length;i++)o("https://"+t[i])},a={},p=i.slice(1).split("&"),u=decodeURIComponent,l=p.length-1,g=void 0;l>=0;l--)a[u((g=p[l].split("="))[0])]=u(g[1]||"").replace("+","");var y=Date.now(),_=r("imid")||r("imid_secure"),F=(parseInt(a.sl)||2)>=2,f=s("synced_imid")||0,h=function(t){t&&"THISISOPTEDOUTCOOKIEID"!==t&&function(t){for(var i=function(t){return[["cm.g.doubleclick.net/pixel?google_nid=intimatemerger_dmp&google_cm","yjtag.yahoo.co.jp/csx?tp=wAiXPd0","analytics.twitter.com/i/adsct?p_id=980&p_user_id="+t,"dpm.demdex.net/ibs:dpid=14701&dpuuid="+t,"gum.criteo.com/sync?c=263&r=1&a=1&u=https%3A%2F%2Fsync.im-apps.net%2Fimid%2Fset%3Fcid%3D1000531%26tid%3Dgid%26uid%3D%40USERID%40","match.adsrvr.org/track/cmf/generic?ttd_pid=intmerger&ttd_tpi=1"],["sync.dmp.fout.jp/serve/?id=3920&mt=47","sync.shinobi.jp/v2/sync/ne?r=https%3A%2F%2Fsync.im-apps.net%2Fimid%2Fset%3Fcid%3D10338%26tid%3Dsid%26uid%3D","image6.pubmatic.com/AdServer/UCookieSetPug?rd=https%3A%2F%2Fb6.im-apps.net%2F1007854%2Fmap%2F%23PM_USER_ID","tags.bluekai.com/site/53700?limit=1&id="+t,"cr-p10000.ladsp.com/pid/10000","b1sync.zemanta.com/usersync/intimatemerger/?cb=https%3A%2F%2Fsync.im-apps.net%2Fimid%2Fset%3Fcid%3D1006749%26tid%3Dzid%26uid%3D__ZUID__&gdpr=0&gdpr_consent=&us_privacy="],["sync-tm.everesttech.net/upi/pid/ASSwM7HG/?redir=https%3A%2F%2Fsync.im-apps.net%2Fimid%2Fset%3Fcid%3D5661%26tid%3Dtid%26uid%3D%24%7BTM_USER_ID%7D","usermatch.krxd.net/um/v2?partner=intimatemerger","tg.socdm.com/aux/idsync?proto=im","api.primecaster.net/adlogue/api/sync/im","a.o2u.jp/pixel/?id=tohXx5i4Vk/MPWTZ1IESXN4lJyQ6Ybx/&__imid_ori="+t,"cms.analytics.yahoo.com/cms?partner_id=intmer&gdpr=false&euconsent="]]}(t),e=0;e<i.length;e++){var n=i[e],c="synced_group_g"+(e+1),r=s(c);if("number"!=typeof r||y-r>2592e5){m(n),d(c,y);break}}}(t)};!_||y-f>864e5?o(e+"//sync.im-apps.net/imid/set?no_sync=1",(function(){_=r("imid")||r("imid_secure"),d("synced_imid",y),F&&h(_)})):F&&h(_)}();</script></body></html>

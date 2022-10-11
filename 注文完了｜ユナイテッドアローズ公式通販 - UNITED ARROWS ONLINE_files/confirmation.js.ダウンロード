@@ -1,0 +1,73 @@
+/*global vs, vsEnv, vsApiKey, vsOrderObject, vsDomain*/
+
+(function (env, domain) {
+  window.Virtusize = "vs";
+  window["vs"] = []; // reset window.vs variable
+  window["vs"].env = env || "production";
+  window["vs"].url = window.location.host;
+  window["vs"].snippetVersion = "v7";
+  // Methods that can be called before integration has loaded
+  window["vs"].methods = [
+    "setApiKey",
+    "setRegion",
+    "setLanguage",
+    "setWidgetOverlayColor",
+    "addWidget",
+    "ready",
+    "setMobile",
+    "on",
+    "setAvailableSizes",
+    "setSizeAliases",
+    "addOrder",
+    "addFindByFit",
+    "setUserId",
+  ];
+
+  window["vs"].factory = function (method) {
+    return function () {
+      var args = Array.prototype.slice.call(arguments);
+      args.unshift(method);
+      window["vs"].push(args);
+      return window["vs"];
+    };
+  };
+  var methods = window["vs"].methods;
+  for (var i = 0; i < methods.length; i++) {
+    window["vs"][methods[i]] = window["vs"].factory(methods[i]);
+  }
+
+  var prefix = document.location.protocol + "//static.api.virtusize.";
+  domain = domain || "jp";
+  var suffix = "/a/integration/";
+  var environment = window["vs"].env === "staging" ? "staging/" : "";
+  var version = window["vs"].snippetVersion;
+  var url = prefix + domain + suffix + environment + version;
+
+  var script = document.createElement("script");
+  var first = document.getElementsByTagName("script")[0];
+  script.async = 1;
+  script.src = url + ".js";
+  script.id = "vs-integration";
+  first.parentNode.insertBefore(script, first);
+})(vsEnv, vsDomain);
+
+if (vsOrderObject && vsOrderObject.items) {
+  for (var k = 0; k < vsOrderObject.items.length; k++) {
+    var path = vsOrderObject.items[k].imageUrl;
+    if (path.indexOf("http") === -1) {
+      var separator = path[0] === "/" ? "" : "/";
+      vsOrderObject.items[k].imageUrl = window.location.origin + separator + path;
+    }
+  }
+}
+
+if (vsApiKey && vsOrderObject && vsDomain) {
+  var prefix = vsEnv === "staging" ? "staging" : "api";
+  var suffix = vsEnv === "staging" && !window.vsInternalOrderTest ? "com" : vsDomain;
+  vs.apiUrl = prefix + ".virtusize." + suffix;
+  vs.setApiKey(vsApiKey);
+  vs.addOrder(vsOrderObject);
+} else {
+  // eslint-disable-next-line no-console
+  console.log("vsApiKey or vsOrderObject or vsDomain not set correctly");
+}

@@ -1,0 +1,37 @@
+
+(function() {
+    const tokenElement = document.createElement('meta');
+    tokenElement.httpEquiv = 'origin-trial';
+    tokenElement.content = 'A0WZr/hOHCl86V5sNc7wSP9+K/gvzed1uPaxu02g69qNcj+gOrdQp5HE9GQMrJONEwC0oxTq3C271XWCvXBZlg8AAAB/eyJvcmlnaW4iOiJodHRwczovL2xhZHNwLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjY5NzY2Mzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==';
+    document.head.appendChild(tokenElement);
+})();
+
+(function() {
+    if (typeof document.featurePolicy != 'undefined' && document.featurePolicy != null && typeof document.featurePolicy.allowsFeature == 'function' && document.featurePolicy.allowsFeature('attribution-reporting')) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.body === null) {
+                    document.body = document.createElement('body');
+                }
+                var img = document.createElement('img');
+                img.style.display = 'none';
+                img.style.width = '1px';
+                img.style.height = '1px';
+                img.src = '';
+                img.setAttribute('attributionsrc', 'https://adv9892.ps.ladsp.com/attribution_trigger?advertiser_id=9892&trid=4997488593690867878&site_url=https%3A%2F%2Fstore.united-arrows.co.jp%2Forder%2Freg%3Fop%3Dcomplete&asr=false&sg=6b9da790f65ef918616411b25d63beef9424621d');
+                document.body.appendChild(img);
+            });
+        } else {
+            if (document.body === null) {
+                document.body = document.createElement('body');
+            }
+            var img = document.createElement('img');
+            img.style.display = 'none';
+            img.style.width = '1px';
+            img.style.height = '1px';
+            img.src = '';
+            img.setAttribute('attributionsrc', 'https://adv9892.ps.ladsp.com/attribution_trigger?advertiser_id=9892&trid=4997488593690867878&site_url=https%3A%2F%2Fstore.united-arrows.co.jp%2Forder%2Freg%3Fop%3Dcomplete&asr=false&sg=6b9da790f65ef918616411b25d63beef9424621d');
+            document.body.appendChild(img);
+        }
+    }
+})();

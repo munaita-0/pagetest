@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html wovn-ignore=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript">
+    (function() {
+      var container = document.querySelector('#_tcx-oz4jvxdhx5');
+      if (!container) {
+        return;
+      }
+
+      function addToContainer(url, text) {
+        const wrapper = document.createElement('div');
+        wrapper.setAttribute('data-tcx-url', url);
+        wrapper.innerText = text;
+        container.appendChild(wrapper);
+      }
+
+      const fetch = window.fetch
+      window.fetch = function() {
+        return Promise.resolve(fetch.apply(window, arguments))
+            .then(async response => {
+              if (response.ok) {
+                try {
+                  const clone = response.clone();
+                  const json = await clone.json();
+                  addToContainer(clone.url, JSON.stringify(json));
+                } catch (err) {}
+              }
+              return response;
+            });
+      };
+
+      var XHR = XMLHttpRequest.prototype;
+      var send = XHR.send;
+      var open = XHR.open;
+      XHR.open = function(method, url) {
+        this.url = url;
+        return open.apply(this, arguments);
+      };
+      XHR.send = function() {
+        this.addEventListener('load', function() {
+          try {
+            const response = this.response;
+            if (response && response.length) {
+              const firstChar = response[0];
+              if (firstChar === '[' || firstChar === '{') {
+                addToContainer(this.url, response);
+              }
+            }
+          } catch (err) {
+            // No-op.
+          }
+        });
+        return send.apply(this, arguments);
+      };
+    })();
+  </script>
+    
+    <meta name="viewport" content="width=device-width">
+    <meta name="robots" content="noindex">
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="Q2qb9WxYzl5BrdMYXavzdSV9uHCv3Yy5Oquk6SELL86RWCpp/KwLnQ6HSrCQha6+lIdNoALnu1ARanOSs3In8w==">
+  </head>
+  <body>
+    <script>
+  if (/widget_session/.test(document.cookie)) {
+    var stallionHref = location.href
+                            .toString()
+                            .replace(/\/stallion_loader\/?\?/, '/stallion?')
+                            .replace(/:\/\/j\./, '://cdn.')
+    location.href = stallionHref
+  } else {
+    window.top.postMessage({ messageType: 'WOVN_STALLION_AUTH_FAILED' }, '*')
+  }
+</script>
+
+  
+
+</body></html>
