@@ -12,5 +12,5 @@ function writeToLocalStorage() {
 writeToCookie()
 writeToLocalStorage()
 
-console.log('js_version_005')
+console.log('js_version_006')
   
