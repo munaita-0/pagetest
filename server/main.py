@@ -18,7 +18,7 @@ def test():
 @app.route("/cookie_test")
 def cookie_test_2():
     resp = make_response()
-    max_age = 60 * 60 * 24 * 120  # 120 days
+    max_age = 60 * 60 * 24 * 1000
     # domain="xxxx" でdomain指定できるが、配信元以外のドメインを指定しするとcookie setされなかった
     # domainを指定しないと自動的に配信元のdomainが指定される
     resp.set_cookie('uid', value="asdf", max_age=max_age, path='/', secure=True, httponly=True)
@@ -29,7 +29,7 @@ def cookie_test_2():
 @app.route("/cookie_test_with_1st_domain")
 def cookie_test_3():
     resp = make_response()
-    max_age = 60 * 60 * 24 * 120  # 120 days
+    max_age = 60 * 60 * 24 * 1000  # 120 days
     # pathを指定しないと自動的に / が指定される
     resp.set_cookie('uid', value="asdf", max_age=max_age, domain="ones-form-test.55-inc.jp", secure=True, httponly=True)
     resp.headers.add('Access-Control-Allow-Origin', '*')
