@@ -1,5 +1,7 @@
 function writeToCookie() {
-    document.cookie = "cookie_by_1st_js=aaaaaaaa;domain=hoge.js;secure";
+    document.cookie = "1st_with_secure=iiii;Secure";
+    document.cookie = "1st_with_write_domain=uuuu;domain=ones-form-test.55-inc.jp";
+    document.cookie = "1st_with_wrong_domain=uuuu;domain=hoge.jp";
 }
 
 function writeToLocalStorage() {
@@ -9,5 +11,5 @@ function writeToLocalStorage() {
 writeToCookie()
 writeToLocalStorage()
 
-console.log('js_version_002')
+console.log('js_version_003')
   
